@@ -1,0 +1,4 @@
+# @package _global_
+latent_size: 40
+algo_params:
+  alpha_ratio: 1.5

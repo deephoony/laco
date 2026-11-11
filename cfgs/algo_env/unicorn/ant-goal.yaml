@@ -1,0 +1,14 @@
+# @package _global_
+# Ant-Goal override (ant-dir override와 동일한 진단):
+#   - algo/unicorn.yaml의 reward_scale=1.0 (공식 repo의 SAC 기반 기본값)이
+#     본 프레임워크의 BRAC (alpha_max=2000, alpha_init=500)과 결합되면
+#     페널티가 보상을 압도해 정책이 behavior에서 이탈하지 못함.
+#     ant-goal는 extreme OOD가 "반대 방향으로 가야" 도달 가능하므로 BRAC이
+#     과도하면 학습이 진행될수록 OOD 리턴이 발산(-600 근처).
+#   - env/common.yaml의 reward_scale=5.0과 정렬하여 ER-TRL/CSRO/FOCAL과
+#     BRAC vs reward 균형을 동일하게 맞춘다.
+#   - alpha_ratio는 2D goal 좌표를 latent에 선명히 박기 위해 완만 상향.
+#     latent_size는 override 없이 experiment.yaml 기본값 20을 사용.
+algo_params:
+  reward_scale: 5.0
+  alpha_ratio: 0.5

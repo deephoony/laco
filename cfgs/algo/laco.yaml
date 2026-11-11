@@ -1,0 +1,37 @@
+# @package _global_
+algo_name: "laco"
+
+algo_params:
+  allow_backward_z: false
+  use_FOCAL_cl: true
+  use_club: true
+  use_prediction: false
+  # --- LACO regularizer coefficients ---
+  alpha_lc: 1.0     # latent-conservative critic penalty weight
+  beta_lip: 1.0     # z-Lipschitz weight (critic AND policy)
+  kappa: 0.5        # noise scale: sigma = kappa * per-dim std of batch latents
+  eta: 0.5          # extrapolation range: lambda ~ U(1, 1+eta)
+  # --- ablation toggles (all false => exact CSRO behavior) ---
+  use_lc: true
+  use_lip: true
+  use_lip_pi: true
+  lc_use_cross: true
+  lc_use_intp: true
+  lc_use_extp: true
+  # --- logsumexp temperature: 1.0 reproduces the original hard-max ---
+  lc_tau: 1.0
+  # --- dual control of alpha_lc, off by default ---
+  lc_auto: false
+  lc_target: 0.9
+  lc_auto_lr: 0.0003
+  lc_alpha_min: 0.01
+  lc_alpha_max: 100.0
+  # dual-step stability (defaults = original controller)
+  lc_auto_warmup: 0        # gradient steps before the controller engages
+  lc_auto_ema: 0.99        # EMA on the measured ratio
+  lc_auto_max_step: 1e9    # cap on |d log alpha| per step
+
+util_params:
+  exp_name: 'laco'
+
+algo_type: "LACO"

@@ -1,0 +1,42 @@
+# @package _global_
+algo_name: "laco_unicorn"
+
+# LACO on the UNICORN-SS backbone (rebuttal E2). Everything above the LACO
+# block is cfgs/algo/unicorn.yaml verbatim; the env-specific UNICORN overrides
+# are reused through the cfgs/algo_env/laco_unicorn -> unicorn symlink.
+algo_params:
+  allow_backward_z: false
+  use_FOCAL_cl: true
+  use_club: false
+  z_loss_weight: 1.0
+  alpha_ratio: 0.15
+  decoder_lr: 0.0003
+  reward_scale: 1.0
+  policy_mean_reg_weight: 0.0
+  policy_std_reg_weight: 0.0
+  policy_pre_activation_weight: 0.0
+  # --- LACO regularizer coefficients (same defaults as cfgs/algo/laco.yaml) ---
+  alpha_lc: 1.0
+  beta_lip: 1.0
+  kappa: 0.5
+  eta: 0.5
+  use_lc: true
+  use_lip: true
+  use_lip_pi: true
+  lc_use_cross: true
+  lc_use_intp: true
+  lc_use_extp: true
+  lc_tau: 1.0
+  lc_auto: false
+  lc_target: 0.9
+  lc_auto_lr: 0.0003
+  lc_alpha_min: 0.01
+  lc_alpha_max: 100.0
+  lc_auto_warmup: 0
+  lc_auto_ema: 0.99
+  lc_auto_max_step: 1e9
+
+util_params:
+  exp_name: 'laco_unicorn'
+
+algo_type: "LACO_UNICORN"

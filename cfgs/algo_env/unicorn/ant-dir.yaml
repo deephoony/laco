@@ -1,0 +1,12 @@
+# @package _global_
+# Ant-Dir override: algo/unicorn.yaml sets reward_scale=1.0 (공식 repo의 SAC 기반
+# 기본값)이지만, 본 프레임워크는 BRAC 기반 (use_brac=True, alpha_max=2000)이라
+# 보상 대비 BRAC 페널티가 상대적으로 5배 강해져 정책이 행동정책에서 이탈하지
+# 못함 → ID 낮음 / OOD (방향 반전) 실패. env/common.yaml의 reward_scale=5.0과
+# 정렬하여 BRAC vs reward 균형을 ER-TRL/CSRO/FOCAL과 맞춘다.
+# alpha_ratio는 방향(θ) 식별에 FOCAL 비중을 완만히 상향 (hopper 1.5, walker 0.7
+# 선례 대비 보수적인 0.5).
+latent_size: 5
+algo_params:
+  reward_scale: 5.0
+  alpha_ratio: 0.5

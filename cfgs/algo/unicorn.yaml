@@ -1,0 +1,26 @@
+# @package _global_
+algo_name: "unicorn"
+
+# UNICORN-SS (paper Eq.): L_encoder = L_recon + (alpha / (1-alpha)) * L_FOCAL
+#   - L_recon: Gaussian NLL on raw (next_obs - obs) and raw reward
+#   - L_FOCAL: FOCAL metric_loss
+# `alpha_ratio` := alpha/(1-alpha); corresponds to `beta_encoder` in the official
+# UNICORN repo (misleading name there — it multiplies FOCAL, not the decoder).
+# `alpha_ratio` is a UNICORN-only key. Env-specific UNICORN overrides now live
+# in cfgs/algo_env/unicorn/*.yaml so cfgs/env/*.yaml stay aligned with ER-TRL.
+algo_params:
+  allow_backward_z: false
+  use_FOCAL_cl: true
+  use_club: false
+  z_loss_weight: 1.0        # unused by UNICORN; kept for global config compat
+  alpha_ratio: 0.15         # default (cheetah-vel / ant-dir value from official repo)
+  decoder_lr: 0.0003
+  reward_scale: 1.0
+  policy_mean_reg_weight: 0.0
+  policy_std_reg_weight: 0.0
+  policy_pre_activation_weight: 0.0
+
+util_params:
+  exp_name: 'unicorn'
+
+algo_type: "UNICORN"
