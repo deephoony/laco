@@ -54,3 +54,11 @@ python scripts/analyze_latent_value.py --env ant-dir --algo laco --cpu --ckpt-ro
 ```
 
 Prefix a command with `python scripts/cpu_run.py` in place of `python` to evaluate on the CPU.
+
+## License
+
+This repository is released under the MIT License (see `LICENSE`). Parts of the code are
+adapted from rlkit, PEARL and the public implementations of CSRO, UNICORN and ER-TRL. Files
+that carry their own license header or license file keep that license:
+`rlkit/torch/pytorch_sac/` (MIT, Denis Yarats) and `rlkit/torch/brac/` (Apache 2.0, The Google
+Research Authors).
